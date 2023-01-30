@@ -3,13 +3,18 @@ Code Data Science Tools for Python
 
 Installation:
 
-    pip install code-data-science
+    pip install code_data_science
 
 Usage
 
-    from code-data-science.vectorize_version import vectorize_version
+    from code_data_science.sort_versions import sort_versions
 
-    >>>vectorize_version(['1.1.0','1.2.0','1.3.0.RELEASE'])
+    >>>sort_versions(['1.1.0','1.2.0','1.3.0.RELEASE'])
     -----input
 
-This package uses doctest for testing, run :code:`doctest vectorize_version.py` to run the tests.
+    from code_data_science.index_versions import index_versions
+
+    >>>index_versions(['1.1.0','1.2.0','1.3.0.RELEASE'])
+    -----input
+
+This package uses doctest for testing, run :code:`doctest sort_versions.py` to run the tests.

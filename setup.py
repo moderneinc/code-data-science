@@ -1,9 +1,9 @@
 from distutils.core import setup
 
 setup(
-    name='code-data-science',
-    version='1.0.0',
-    packages=['code-data-science'],
+    name='code_data_science',
+    version='1.0.1',
+    packages=['code_data_science'],
     url='https://github.com/moderneinc/code-data-science',
     license='Apache 2.0',
     author='Jonathan Schneider',

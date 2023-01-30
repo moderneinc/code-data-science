@@ -18,6 +18,7 @@ def sort_versions(versions, metadata_pattern=None):
 
     def metadata_compare(v1, v2):
         return compare_versions(v1, v2, metadata_pattern)
+
     return sorted(versions, key=functools.cmp_to_key(metadata_compare))
 
 
