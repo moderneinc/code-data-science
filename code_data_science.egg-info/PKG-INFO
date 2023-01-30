@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: code-data-science
+Version: 1.0.0
+Summary: A python implementation of various tools used in code data science.
+Home-page: https://github.com/moderneinc/code-data-science
+Author: Jonathan Schneider
+Author-email: jonathan@moderne.io
+License: Apache 2.0

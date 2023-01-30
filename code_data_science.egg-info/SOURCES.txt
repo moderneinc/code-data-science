@@ -1,0 +1,8 @@
+README.rst
+setup.py
+code-data-science/__init__.py
+code-data-science/vectorize_version.py
+code_data_science.egg-info/PKG-INFO
+code_data_science.egg-info/SOURCES.txt
+code_data_science.egg-info/dependency_links.txt
+code_data_science.egg-info/top_level.txt
