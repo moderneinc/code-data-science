@@ -11,3 +11,4 @@ pip-delete-this-directory.txt
 .idea/
 venv/
 dist/
+build/
