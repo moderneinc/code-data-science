@@ -1,9 +1,0 @@
-README.rst
-setup.py
-code_data_science/__init__.py
-code_data_science/index_versions.py
-code_data_science/sort_versions.py
-code_data_science.egg-info/PKG-INFO
-code_data_science.egg-info/SOURCES.txt
-code_data_science.egg-info/dependency_links.txt
-code_data_science.egg-info/top_level.txt
