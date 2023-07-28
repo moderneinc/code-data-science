@@ -74,7 +74,7 @@ __moderneColorMap = {
 }
 
 
-def moderne_qualitative_palette(number=0):
+def moderne_qualitative_palette(number: int = 0):
     if number == 500:
         return [
             __moderneColorMap['blue'][500],

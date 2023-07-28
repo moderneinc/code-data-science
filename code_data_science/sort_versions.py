@@ -2,7 +2,7 @@ import functools
 import re
 
 
-def sort_versions(versions, metadata_pattern=None):
+def sort_versions(versions: [str], metadata_pattern: str = None) -> [str]:
     """
         Sort the versions in order from oldest to newest. Not every version must strictly adhere to Semver.
         :param versions: a list of versions to sort
@@ -22,7 +22,7 @@ def sort_versions(versions, metadata_pattern=None):
     return sorted(versions, key=functools.cmp_to_key(metadata_compare))
 
 
-def compare_versions(v1, v2, metadata_pattern=None):
+def compare_versions(v1: str, v2: str, metadata_pattern: str = None) -> int:
     nv1 = v1
     nv2 = v2
 
@@ -36,21 +36,21 @@ def compare_versions(v1, v2, metadata_pattern=None):
         for i in range(1, len_diff):
             nv1 += ".0"
 
-    releasePattern = re.compile(r"(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?([-+].*)?")
-    v1Gav = releasePattern.match(nv1)
-    v2Gav = releasePattern.match(nv2)
+    release_pattern = re.compile(r"(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?([-+].*)?")
+    v1_gav = release_pattern.match(nv1)
+    v2_gav = release_pattern.match(nv2)
 
     normalized1 = nv1 if metadata_pattern is None else nv1.replace(metadata_pattern, "")
     normalized2 = nv2 if metadata_pattern is None else nv2.replace(metadata_pattern, "")
 
     for i in range(1, max(vp1, vp2)):
-        v1Part = v1Gav.group(i)
-        v2Part = v2Gav.group(i)
-        if v1Part is None:
-            return normalized1.compareTo(normalized2) if v2Part is None else -1
-        elif v2Part is None:
+        v1_part = v1_gav.group(i)
+        v2_part = v2_gav.group(i)
+        if v1_part is None:
+            return compare_versions(normalized1, normalized2) if v2_part is None else -1
+        elif v2_part is None:
             return 1
-        diff = int(v1Part) - int(v2Part)
+        diff = int(v1_part) - int(v2_part)
         if diff != 0:
             return diff
 
@@ -62,7 +62,7 @@ def compare_versions(v1, v2, metadata_pattern=None):
         return -1
 
 
-def __normalize_version(v) -> str:
+def __normalize_version(v: str) -> str:
     """
     Remove RELEASE and FINAL suffixes and make sure there are at least three parts to the version.
     :param v:
@@ -98,7 +98,7 @@ def __normalize_version(v) -> str:
     return v
 
 
-def __count_version_parts(v) -> int:
+def __count_version_parts(v: str) -> int:
     count = 0
     for part in re.split(r"[.\-$]", v):
         if len(part) == 0 or not (part[0].isdigit()):
