@@ -1,6 +1,6 @@
 from enum import Enum
 from pandas import DataFrame
-from IPython.display import display
+from IPython.display import display as ipython_display
 
 
 class ColumnType(str, Enum):
@@ -10,7 +10,7 @@ class ColumnType(str, Enum):
     LINK = "link"
 
 
-def moderne_data_grid(df: DataFrame, column_types=None):
+def display(df: DataFrame, column_types=None):
     """
     Converts the dataframe to a format that can be consumed by the moderne data grid.
     Calling this will result in the data frame passed being rendered as a moderne data grid on the dashboard
@@ -24,11 +24,9 @@ def moderne_data_grid(df: DataFrame, column_types=None):
     csv_data = list(filter(None, csv_data))
 
     # Create the output dictionary
-    output_data = {
+    ipython_display({
         "application/vnd.moderne.datagrid+json": {
             "rows": csv_data,
             "columnTypes": column_types
         }
-    }
-
-    display(output_data, raw=True)
+    }, raw=True)

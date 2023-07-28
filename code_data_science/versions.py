@@ -2,32 +2,37 @@ import functools
 import re
 
 
-def sort_versions(versions: [str], metadata_pattern: str = None) -> [str]:
+def index(versions: [str], metadata_pattern=None):
+    sorted_versions = sort(set(versions), metadata_pattern)
+    return {v: sorted_versions.index(v) for v in sorted_versions}
+
+
+def sort(versions: [str], metadata_pattern: str = None) -> [str]:
     """
         Sort the versions in order from oldest to newest. Not every version must strictly adhere to Semver.
         :param versions: a list of versions to sort
         :param metadata_pattern: optionally, a metadata pattern like '-jre' in Google Guava versions
         :rtype array:
-        >>> sort_versions(['1.1.1.1', '1.1.1.2'])
+        >>> sort(['1.1.1.1', '1.1.1.2'])
         ['1.1.1.1', '1.1.1.2']
-        >>> sort_versions(['1.1.1.1', '1'])
+        >>> sort(['1.1.1.1', '1'])
         ['1', '1.1.1.1']
-        >>> sort_versions(['2.1.1', '1.1.1'])
+        >>> sort(['2.1.1', '1.1.1'])
         ['1.1.1', '2.1.1']
         """
 
     def metadata_compare(v1, v2):
-        return compare_versions(v1, v2, metadata_pattern)
+        return compare(v1, v2, metadata_pattern)
 
     return sorted(versions, key=functools.cmp_to_key(metadata_compare))
 
 
-def compare_versions(v1: str, v2: str, metadata_pattern: str = None) -> int:
+def compare(v1: str, v2: str, metadata_pattern: str = None) -> int:
     nv1 = v1
     nv2 = v2
 
-    vp1 = __count_version_parts(nv1)
-    vp2 = __count_version_parts(nv2)
+    vp1 = __count_parts(nv1)
+    vp2 = __count_parts(nv2)
     len_diff = abs(vp1 - vp2)
     if v1 > v2:
         for i in range(1, len_diff):
@@ -47,7 +52,7 @@ def compare_versions(v1: str, v2: str, metadata_pattern: str = None) -> int:
         v1_part = v1_gav.group(i)
         v2_part = v2_gav.group(i)
         if v1_part is None:
-            return compare_versions(normalized1, normalized2) if v2_part is None else -1
+            return compare(normalized1, normalized2) if v2_part is None else -1
         elif v2_part is None:
             return 1
         diff = int(v1_part) - int(v2_part)
@@ -62,24 +67,24 @@ def compare_versions(v1: str, v2: str, metadata_pattern: str = None) -> int:
         return -1
 
 
-def __normalize_version(v: str) -> str:
+def __normalize(v: str) -> str:
     """
     Remove RELEASE and FINAL suffixes and make sure there are at least three parts to the version.
     :param v:
     :return: str:
-    >>> __normalize_version("1.5.1.2.RELEASE")
+    >>> __normalize("1.5.1.2.RELEASE")
     '1.5.1.2'
-    >>> __normalize_version("1.5.1.RELEASE")
+    >>> __normalize("1.5.1.RELEASE")
     '1.5.1'
-    >>> __normalize_version("1.5.1.FINAL")
+    >>> __normalize("1.5.1.FINAL")
     '1.5.1'
-    >>> __normalize_version("1.5.1.Final")
+    >>> __normalize("1.5.1.Final")
     '1.5.1'
-    >>> __normalize_version("29.0")
+    >>> __normalize("29.0")
     '29.0.0'
-    >>> __normalize_version("29.0-jre")
+    >>> __normalize("29.0-jre")
     '29.0.0-jre'
-    >>> __normalize_version("29-jre")
+    >>> __normalize("29-jre")
     '29.0.0-jre'
     """
     if v.endswith(".RELEASE"):
@@ -87,7 +92,7 @@ def __normalize_version(v: str) -> str:
     if v.endswith(".FINAL") or v.endswith(".Final"):
         return v[0:len(v) - len(".FINAL")]
 
-    version_parts = __count_version_parts(v)
+    version_parts = __count_parts(v)
     if version_parts <= 2:
         version_and_metadata = re.split("(?=[-+])", v)
         while version_parts <= 2:
@@ -98,7 +103,7 @@ def __normalize_version(v: str) -> str:
     return v
 
 
-def __count_version_parts(v: str) -> int:
+def __count_parts(v: str) -> int:
     count = 0
     for part in re.split(r"[.\-$]", v):
         if len(part) == 0 or not (part[0].isdigit()):

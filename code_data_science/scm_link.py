@@ -5,8 +5,8 @@ def _base_scm_link(scm_dictionary, origin: str, organization: str, repository: s
         return f"{origin}/{organization}/{repository}"
 
 
-def scm_link(scm_dictionary, origin: str, organization: str, repository: str,
-             committish: str, source_path: str, line) -> str:
+def line_number(scm_dictionary, origin: str, organization: str, repository: str,
+                committish: str, source_path: str, line) -> str:
     """
     Generates a link to a repository's landing page specific to the SCM system it originated from
     """

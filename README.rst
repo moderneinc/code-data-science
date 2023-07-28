@@ -7,14 +7,14 @@ Installation:
 
 Usage
 
-    from code_data_science.sort_versions import sort_versions
+    import code_data_science.versions
 
-    >>>sort_versions(['1.1.0','1.2.0','1.3.0.RELEASE'])
+    >>>versions.sort(['1.1.0','1.2.0','1.3.0.RELEASE'])
     -----input
 
-    from code_data_science.index_versions import index_versions
+    import code_data_science.versions
 
-    >>>index_versions(['1.1.0','1.2.0','1.3.0.RELEASE'])
+    >>>versions.index(['1.1.0','1.2.0','1.3.0.RELEASE'])
     -----input
 
-This package uses doctest for testing, run :code:`doctest sort_versions.py` to run the tests.
+This package uses doctest for testing, run :code:`doctest versions.py` to run the tests.
