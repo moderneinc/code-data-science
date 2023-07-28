@@ -2,13 +2,15 @@ from enum import Enum
 from pandas import DataFrame
 from IPython.display import display
 
+
 class ColumnType(str, Enum):
     """
     Enum for the column types supported by the moderne data grid
     """
     LINK = "link"
 
-def moderne_data_grid(df: DataFrame, columnTypes = None):
+
+def moderne_data_grid(df: DataFrame, columnTypes=None):
     """
     Converts the dataframe to a format that can be consumed by the moderne data grid.
     Calling this will result in the data frame passed being rendered as a moderne data grid on the dashboard
