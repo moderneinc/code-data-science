@@ -1,3 +1,4 @@
+import csv
 from enum import Enum
 from pandas import DataFrame
 from IPython.display import display as ipython_display
@@ -18,7 +19,8 @@ def display(df: DataFrame, column_types=None):
     You can also pass a dictionary where the keys are the column names and the values are the column types.
     To have greater control of how the data grid is rendered.
     """
-    csv_data = df.to_csv(index=False).split('\n')
+    line_terminator = "|^~^|"
+    csv_data = df.to_csv(index=False,quoting=csv.QUOTE_MINIMAL, lineterminator=line_terminator).split(line_terminator)
 
     # Remove empty lines (likely to always be one at the end)
     csv_data = list(filter(None, csv_data))
