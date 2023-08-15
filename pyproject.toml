@@ -1,18 +1,14 @@
 # @see https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
-
 [project]
 name = "code_data_science"
-version = "1.1.6"
+version = "1.1.7"
 description = "A python implementation of various tools used in code data science."
 authors = [
-    { name = "Jonathan Schneider", email = "jonathan@moderne.io"},
-    { name = "Kyle Scully", email = "kyle@moderne.io"}
+    { name = "Jonathan Schneider", email = "jonathan@moderne.io" },
+    { name = "Kyle Scully", email = "kyle@moderne.io" }
 ]
 license = { text = "Apache-2.0" }
-dependencies = [
-    "pandas==2.0.3",
-    "ipython==8.13.0"
-]
+dependencies = ["pandas==2.0.3", "ipython==8.13.0"]
 
 [project.urls]
 "Homepage" = "https://github.com/moderneinc/code-data-science"
