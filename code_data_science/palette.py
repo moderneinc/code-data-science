@@ -112,7 +112,7 @@ def generate_colors(int):
     if int is None:
         return colors 
     else:
-        colors[:int]
+        return colors[:int]
 
 
 def qualitative(number: int = 0):
