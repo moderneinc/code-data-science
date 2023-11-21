@@ -70,15 +70,6 @@ __moderneColorMap = {
     'black': {
         100: '#1e1e1e',
         800: '#121212'
-    },
-    'magenta': {
-        'main': '#db4197'
-    },
-    'periwinkle': {
-        'main': '#7e9bd3'
-    },
-    'mint': {
-        'main': '#d6ffe2'
     }
 }
 
@@ -99,7 +90,7 @@ def qualitative(number: int = 0):
             __moderneColorMap['yellow']['main'],
             __moderneColorMap['green']['main'],
             __moderneColorMap['indigo']['main'],
-            __moderneColorMap['magenta']['main'],
-            __moderneColorMap['periwinkle']['main'],
-            __moderneColorMap['mint']['main'],
+            '#db4197', # magenta
+            '#7e9bd3', # periwinkle
+            '#d6ffe2', # mint
         ]
