@@ -73,16 +73,51 @@ __moderneColorMap = {
     }
 }
 
+def colors_by_weight(weight):
+    """
+    Generate a list of moderne colors with the specified weight.
+    Weights are 100, 200, 300, 400, 500, 600, 700, 800
+    """
+    return [
+        __moderneColorMap['blue'][weight],
+        __moderneColorMap['red'][weight],
+        __moderneColorMap['yellow'][weight],
+        __moderneColorMap['green'][weight],
+        __moderneColorMap['indigo'][weight],
+    ]
+    
+def color_gradient(color):
+    """
+    Generate a color weights for a specific color.
+    Colors are 'blue', 'red', 'yellow', 'green', 'indigo'
+    """
+    return [
+        __moderneColorMap[color][100],
+        __moderneColorMap[color][200],
+        __moderneColorMap[color][300],
+        __moderneColorMap[color][400],
+        __moderneColorMap[color][500],
+        __moderneColorMap[color][600],
+        __moderneColorMap[color][700],
+        __moderneColorMap[color][800],
+        
+    ]
+
+def generate_colors(int):
+    """
+    Generate a list of colors from the moderne color palette.
+    Pass an option int to limit the number of colors returned.
+    """
+    colors = colors_by_weight("main") + colors_by_weight(300) + colors_by_weight(700) + colors_by_weight(500)
+    if int is None:
+        return colors 
+    else:
+        colors[:int]
+
 
 def qualitative(number: int = 0):
     if number == 500:
-        return [
-            __moderneColorMap['blue'][500],
-            __moderneColorMap['red'][500],
-            __moderneColorMap['yellow'][500],
-            __moderneColorMap['green'][500],
-            __moderneColorMap['indigo'][500],
-        ]
+        return colors_by_weight(500)   
     else:
         return [
             __moderneColorMap['blue']['main'],
