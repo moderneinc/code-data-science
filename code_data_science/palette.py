@@ -90,4 +90,7 @@ def qualitative(number: int = 0):
             __moderneColorMap['yellow']['main'],
             __moderneColorMap['green']['main'],
             __moderneColorMap['indigo']['main'],
+            '#db4197', # magenta
+            '#7e9bd3', # periwinkle
+            '#d6ffe2', # mint
         ]
