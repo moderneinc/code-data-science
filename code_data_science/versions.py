@@ -1,13 +1,14 @@
 import functools
 import re
+from typing import Optional
 
 
-def index(versions: [str], metadata_pattern=None):
+def index(versions: [str], metadata_pattern: Optional[str]=None):
     sorted_versions = sort(set(versions), metadata_pattern)
     return {v: sorted_versions.index(v) for v in sorted_versions}
 
 
-def sort(versions: [str], metadata_pattern: str = None) -> [str]:
+def sort(versions: [str], metadata_pattern: Optional[str]=None) -> [str]:
     """
         Sort the versions in order from oldest to newest. Not every version must strictly adhere to Semver.
         :param versions: a list of versions to sort
@@ -27,7 +28,7 @@ def sort(versions: [str], metadata_pattern: str = None) -> [str]:
     return sorted(versions, key=functools.cmp_to_key(metadata_compare))
 
 
-def compare(v1: str, v2: str, metadata_pattern: str = None) -> int:
+def compare(v1: str, v2: str, metadata_pattern: Optional[str] = None) -> int:
     nv1 = v1
     nv2 = v2
 
@@ -44,6 +45,12 @@ def compare(v1: str, v2: str, metadata_pattern: str = None) -> int:
     release_pattern = re.compile(r"(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?([-+].*)?")
     v1_gav = release_pattern.match(nv1)
     v2_gav = release_pattern.match(nv2)
+    
+    # Handle non-matching cases
+    if v1_gav is None:
+        return -1 if v2_gav is not None else 0
+    if v2_gav is None:
+        return 1
 
     normalized1 = nv1 if metadata_pattern is None else nv1.replace(metadata_pattern, "")
     normalized2 = nv2 if metadata_pattern is None else nv2.replace(metadata_pattern, "")
