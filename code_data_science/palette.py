@@ -99,7 +99,37 @@ __moderne_color_map = {
         500: "#27AA88",
         700: "#176652",
     },
-    "cherry_red": {"main": "#FF3232"},
+    # Warm palette
+    "cherry_red": {
+        100: "#FFD3D3",
+        300: "#FF8484",
+        500: "#FF3232",
+        700: "#991E1E",
+    },
+    "magenta": {
+        100: "#F3DAE9",
+        300: "#DD92BF",
+        500: "#DB4197",
+        700: "#83275B",
+    },
+    "amber": {
+        100: "#FBEED4",
+        300: "#FBCB76",
+        500: "#F9A91B",
+        700: "#956510",
+    },
+    "golden": {
+        100: "#FAF2D6",
+        300: "#FEE968",
+        500: "#FDDA04",
+        700: "#8E6E13",
+    },
+    "sunshine": {
+        100: "#FEF9D2",
+        300: "#FAEA7C",
+        500: "#F8DC4A",
+        700: "#958329",
+    },
 }
 
 _moderne_brand_scale = [
@@ -110,7 +140,7 @@ _moderne_brand_scale = [
     "#8fc9aa",
     "#ecb81F",
     __moderne_color_map["yellow"]["main"],
-    "#DB4197",
+    __moderne_color_map["magenta"][500],
     "#992FB9",
     "#D9D8E8",
     __moderne_color_map["cherry_red"]["main"],
