@@ -155,7 +155,7 @@ _moderne_brand_scale = [
 def colors_by_weight(weight):
     """
     Generate a list of moderne colors with the specified weight.
-    Weights are 100, 200, 300, 400, 500, 600, 700, 800
+    Weights are 100, 300, 500, 700
     """
     return [
         __moderne_color_map["digital_blue"][weight],
