@@ -189,10 +189,10 @@ def generate_colors(integer):
     Pass an option int to limit the number of colors returned.
     """
     colors = (
-        colors_by_weight("main")
+        colors_by_weight(500)
         + colors_by_weight(300)
         + colors_by_weight(700)
-        + colors_by_weight(500)
+        + colors_by_weight(100)
     )
     if integer is None:
         return colors
