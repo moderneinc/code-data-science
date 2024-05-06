@@ -159,10 +159,10 @@ def colors_by_weight(weight):
     """
     return [
         __moderne_color_map["digital_blue"][weight],
-        __moderne_color_map["periwinkle"][weight],
+        __moderne_color_map["midnight"][weight],
         __moderne_color_map["activity_green"][weight],
         __moderne_color_map["sage"][weight],
-        __moderne_color_map["midnight"][weight],
+        __moderne_color_map["periwinkle"][weight],
     ]
 
 
