@@ -12,3 +12,7 @@ pip-delete-this-directory.txt
 venv/
 dist/
 build/
+
+# Moderne CLI
+.moderne/*
+!.moderne/context/
