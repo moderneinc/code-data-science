@@ -24,7 +24,15 @@ def _count_leading_comments(filepath: FilePath) -> int:
     return n
 
 
-def read_csv(sample: FilePath, *args, **kwargs) -> DataFrame:
-    filepath = os.environ.get('NB_DATA_TABLE', sample)
+def read_table(filepath: FilePath, *args, **kwargs) -> DataFrame:
+    """Read the data table at `filepath`, which may be gzipped, skipping its metadata preamble.
+
+    Unlike `read_csv`, `NB_DATA_TABLE` does not override the path, so this reads the additional
+    data tables a notebook receives as parameters.
+    """
     return pd.read_csv(filepath, skiprows=_count_leading_comments(filepath), on_bad_lines='skip',
                        skip_blank_lines=True, quoting=csv.QUOTE_ALL, *args, **kwargs)
+
+
+def read_csv(sample: FilePath, *args, **kwargs) -> DataFrame:
+    return read_table(os.environ.get('NB_DATA_TABLE', sample), *args, **kwargs)
