@@ -1,5 +1,6 @@
 import os
 import csv
+import gzip
 
 from typing import Union
 
@@ -12,8 +13,10 @@ FilePath = Union[str, "PathLike[str]"]
 def _count_leading_comments(filepath: FilePath) -> int:
     # Data table metadata (`# @name ...`) only precedes the header. Skipping just those lines lets
     # pandas read the file directly; a `#` line further down is inside a quoted multi-line cell.
+    # pandas infers compression from the file name, so this pre-read has to decompress the same way.
+    opener = gzip.open if str(filepath).endswith('.gz') else open
     n = 0
-    with open(filepath, 'r') as f:
+    with opener(filepath, 'rt') as f:
         for line in f:
             if not line.lstrip().startswith('#'):
                 break
