@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v2.2.2 (2026-09-29)
+
+### Bug Fixes
+
+- Read gzipped data tables in read_csv
+  ([`91b1b55`](https://github.com/moderneinc/code-data-science/commit/91b1b5519de7d5cebc1f6d8cb6c685d8844ebaa8))
+
+
 ## v2.2.1 (2026-09-29)
 
 ### Bug Fixes
