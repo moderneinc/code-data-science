@@ -20,6 +20,14 @@ def sort(versions: [str], metadata_pattern: Optional[str]=None) -> [str]:
         ['1', '1.1.1.1']
         >>> sort(['2.1.1', '1.1.1'])
         ['1.1.1', '2.1.1']
+        >>> sort(['2.0.0-20210102.000000-2', '2.0.0-20210101.123456-1'])
+        ['2.0.0-20210101.123456-1', '2.0.0-20210102.000000-2']
+        >>> sort(['1.0.0-1-3', '1.0.0-1-2'])
+        ['1.0.0-1-2', '1.0.0-1-3']
+        >>> sort(['1.2.3.4.5.6.8', '1.2.3.4.5.6.7'])
+        ['1.2.3.4.5.6.7', '1.2.3.4.5.6.8']
+        >>> sort(['1.0.0.0.0.0.0', '1.0'])
+        ['1.0', '1.0.0.0.0.0.0']
         """
 
     def metadata_compare(v1, v2):
@@ -55,11 +63,16 @@ def compare(v1: str, v2: str, metadata_pattern: Optional[str] = None) -> int:
     normalized1 = nv1 if metadata_pattern is None else nv1.replace(metadata_pattern, "")
     normalized2 = nv2 if metadata_pattern is None else nv2.replace(metadata_pattern, "")
 
-    for i in range(1, max(vp1, vp2)):
+    numeric_groups = release_pattern.groups - 1
+    for i in range(1, min(max(vp1, vp2), numeric_groups + 1)):
         v1_part = v1_gav.group(i)
         v2_part = v2_gav.group(i)
         if v1_part is None:
-            return compare(normalized1, normalized2) if v2_part is None else -1
+            if v2_part is not None:
+                return -1
+            if metadata_pattern is None:
+                break
+            return compare(normalized1, normalized2)
         elif v2_part is None:
             return 1
         diff = int(v1_part) - int(v2_part)
