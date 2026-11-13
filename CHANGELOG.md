@@ -2,6 +2,15 @@
 
 <!-- version list -->
 
+## v2.2.3 (2026-11-13)
+
+### Bug Fixes
+
+- Stop versions.compare recursing forever on long shared version prefixes
+  ([#15](https://github.com/moderneinc/code-data-science/pull/15),
+  [`01ee34d`](https://github.com/moderneinc/code-data-science/commit/01ee34da6e74cad7426f677fe5d4e7aff4632b90))
+
+
 ## v2.2.2 (2026-09-29)
 
 ### Bug Fixes
